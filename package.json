@@ -1,0 +1,25 @@
+{
+  "name": "history-undo",
+  "version": "1.0.0",
+  "description": "undo/redo stack for managing histories",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "undo",
+    "redo",
+    "stack",
+    "history"
+  ],
+  "author": "TheoXiong",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheoXiong/history-undo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TheoXiong/history-undo/issues"
+  },
+  "homepage": "https://github.com/TheoXiong/history-undo#readme"
+}
