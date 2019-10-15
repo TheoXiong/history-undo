@@ -41,6 +41,7 @@ console.log('[ current ]: ', history.current) // { value: 100 }
 ```
 new History(options)
 ```
+`options.maxLength` {Number}: 栈最大长度（最多可保存的状态数量，超过后移出最先入栈的数据），默认为`10`
 
 ### push
 新状态入栈
@@ -48,7 +49,7 @@ new History(options)
 ```
 history.push(target)
 ```
-`target` <Object>: 任意要保存的状态数据
+`target` {Object}: 任意要保存的状态数据
 
 ### undo
 撤销，返回上一个保存的状态数据
