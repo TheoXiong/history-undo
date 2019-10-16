@@ -1,4 +1,5 @@
 const _stack = Symbol('_stack')
+const _onChange = Symbol('_onChange')
 
 class History {
   constructor (options) {
@@ -6,6 +7,7 @@ class History {
     this[_stack] = []
     this.position = -1
     this.maxLength = (typeof options.maxLength !== 'undefined') ? options.maxLength : 10
+    this[_onChange] = (typeof options.onChange === 'function') ? options.onChange : () => {}
   }
   destroy () {
     this.clear()
@@ -13,6 +15,7 @@ class History {
   clear () {
     this[_stack] = []
     this.position = -1
+    this[_onChange]()
   }
   push (target) {
     if ((this.position + 1) >= this.maxLength) {
@@ -24,22 +27,27 @@ class History {
     this[_stack].splice(this.position + 1)
     this[_stack].push(JSON.stringify(target))
     this.position++
+    this[_onChange]()
   }
   undo (callback) {
     if (!this.undoable) {
-      return
+      typeof callback === 'function' ? callback(null) : ''
+      return null
     }
     let target = JSON.parse(this[_stack][--this.position])
     typeof callback === 'function' ? callback(target) : ''
+    this[_onChange]()
 
     return target
   }
   redo (callback) {
     if (!this.redoable) {
-      return
+      typeof callback === 'function' ? callback(null) : ''
+      return null
     }
     let target = JSON.parse(this[_stack][++this.position])
     typeof callback === 'function' ? callback(target) : ''
+    this[_onChange]()
 
     return target
   }
@@ -47,7 +55,7 @@ class History {
     if (this.position >= 0 && this.position < this[_stack].length) {
       return JSON.parse(this[_stack][this.position])
     } else {
-      return undefined
+      return null
     }
   }
   get undoable () {

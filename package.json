@@ -1,10 +1,19 @@
 {
   "name": "history-undo",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "undo/redo stack for managing histories",
-  "main": "src/index.js",
+  "main": "dist/history.min.js",
   "scripts": {
+    "build": "webpack --progress --mode=production",
     "test": "node test/test.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "webpack": "^4.28.0",
+    "webpack-cli": "^3.1.2"
   },
   "keywords": [
     "undo",
